@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='CSS/style.css') }}">
+   
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>Daily Construction Progress</title>
+    
+   
+</head>
+<body>
+    <img src=/static/images/fast.jpg alt=static/images/fast.jpg class=image>
+    <div id="wrapper">
+        <div class="div">
+            <h1 class="subhead1 mb-5 d-flex justify-content-center">Good Day {{ session['user_name'] }}</h1>
+        </div>
+      
+        <p>All reports</p>     
+        <p class="subhead">To See the details please click the view link</p>
+        <a href="/report/new" class="navLink1">Create</a>||
+        <a href="/users/logout" class="navLink">Logout</a>
+        <div id="bodyDiv">
+            
+                <table>           
+                    <table class="table table-striped table-hover mb-3">             
+                        <thead>
+                            <tr>
+                                <th>Project Name</th>
+                                <th>Job No.</th>
+                                <th>View</th>    
+                                <th>Prepared By</th>                          
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for report in reports %}
+                            <tr>
+                                <td>{{ report.project_name }}
+                                    {% if report.user_id == session['user_id'] %}                              
+                                    <a href="/report/edit/{{ report.id }}" class="navLink">Edit</a>| 
+                                    <a href="/report/delete/{{ report.id }}" class="navLink">delete</a></td> 
+                                    {% endif %}
+                                
+                                <td>{{ report.job_no }}
+                                <td><a href="/report/view/{{ report.id }}" class="navLink">View</a>
+                                <td>{{ report.creator.first_name }} {{ report.creator.last_name }}</td>                                                        
+                                                                                       
+                            </tr>
+                            {% endfor %}                        
+                        </tbody>                   
+                </table>
+            
+        </div>      
+    </div>
+</body>
+</html>
+

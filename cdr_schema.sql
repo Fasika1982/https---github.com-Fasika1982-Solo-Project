@@ -1,0 +1,1 @@
+SELECT * FROM cdr_schema.users;
