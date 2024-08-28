@@ -64,7 +64,7 @@ button {
     z-index: 1;
     border-radius: 100em;   
 }
-#flash {
+.flash {
     text-decoration-color: blue;
     
 }
